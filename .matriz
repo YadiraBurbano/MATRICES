@@ -1,0 +1,63 @@
+#include "datos.h"
+int sumafila=0;
+int sumacol=0;
+int i;
+int j;
+float totalsumacol=0;
+float promcol=0;
+long int multicol=1;
+String respsuma;
+String respmulti;
+String respprom;
+
+char resp;
+void setup() {
+  Serial.begin(9600);
+  
+}
+void loop(){
+  resp = Serial.read();
+  switch(resp){
+    case 'A':
+   for(j=0;j<20;j++)
+    {
+      for(i=0;i<3;i++)
+      {
+        sumafila=sumafila+matriz[j][i];
+      }
+      respsuma=String("El valor de la suma de la fila "+String(j+1)+" es = "+String(sumafila));
+      Serial.println(respsuma);
+      sumafila=0;
+    }
+    Serial.println(" ");
+    break;
+    case 'B':
+    for(j=0;j<3;j++)
+    {
+      for(i=0;i<20;i++)
+      {
+        multicol=multicol*matriz[i][j];    
+      }
+      respmulti=String("El resultado de la multiplicación de las columnas "+String(j+1)+" es = "+String(multicol));
+      Serial.println(respmulti);
+      multicol=1;
+    }
+    Serial.println(" ");
+
+    break;
+    case 'C':
+    for(j=0;j<3;j++)
+    {
+      for(i=0;i<20;i++)
+      {
+        sumacol=sumacol+matriz[i][j];
+      }
+      totalsumacol=totalsumacol+sumacol;
+      sumacol=0;
+    }
+    promcol=(totalsumacol/3);
+    respprom=String("El promedio de las sumas de todas las columnas es = "+String(promcol));
+    Serial.println(respprom);
+    break;
+  }
+  }
